@@ -27,7 +27,7 @@ namespace Wooting_Test
             Console.WriteLine("Reading Analog data from the Esc key for 10 seconds. Press any key to start...");
             Console.ReadKey();
             int lastValue = -1;
-            while (true)
+            do
             {
                 int value = AnalogReader.ReadAnalog(WootingKey.Keys.Esc);
                 if (lastValue != value)
@@ -35,13 +35,8 @@ namespace Wooting_Test
                     lastValue = value;
                     Console.WriteLine(value);
                 }
-
-                if (watch.Elapsed.Seconds >= 10)
-                {
-                    watch.Stop();
-                    break;
-                }
-            }
+            } while (watch.Elapsed.Seconds < 10);
+            watch.Stop();
 
             Console.WriteLine("Going to read the buffer, please press down some keys, starting in 3 seconds");
             Thread.Sleep(3000);
