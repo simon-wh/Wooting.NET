@@ -61,7 +61,6 @@ namespace Wooting_Test
         {
             Console.WriteLine("Wooting Rgb Control testing!");
             Console.WriteLine($"wooting_rgb_kbd_connected: {RGBControl.IsConnected()}");
-            //RGBControl.wooting_rgb_direct_set_key(0, 0, 255, 0, 0);
             //Console.WriteLine("Turning on auto-update!");
             //RGBControl.wooting_rgb_array_auto_update(true);
             Console.WriteLine("Set disconnected cb");
@@ -90,25 +89,17 @@ namespace Wooting_Test
             RGBControl.UpdateKeyboard();
             Thread.Sleep(1000);
 
-            //RGBControl.woo(true);
-
             for (byte i = 0; i < RGBControl.MaxRGBCols; i++)
             {
                 for (byte j = 0; j < RGBControl.MaxRGBRows; j++)
                 {
                     Console.WriteLine($"Setting the key, ROW:{j}, COL:{i}");
                     keys[j, i] = new KeyColour(255, 255, 0);
-                    //RGBControl.SetKey(j, i, 255, 0, 0, true);
-                    //RGBControl.SetFull(keys);
-                    //RGBControl.UpdateKeyboard();
                     RGBControl.SetFull(keys);
                     RGBControl.UpdateKeyboard();
                     Thread.Sleep(100);
                 }
-                //Thread.Sleep(1000);
-
             }
-            //Console.WriteLine($"wooting_rgb_kbd_connected: {RGBControl.wooting_rgb_kbd_connected()}");
             Console.ReadKey();
             RGBControl.Reset();
             Console.ReadKey();
