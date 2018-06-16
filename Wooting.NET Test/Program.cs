@@ -38,7 +38,8 @@ namespace Wooting_Test
             } while (watch.Elapsed.Seconds < 10);
             watch.Stop();
 
-            Console.WriteLine("Going to read the buffer, please press down some keys, starting in 3 seconds");
+            Console.WriteLine("Going to read the buffer, please press down some keys for 3 seconds");
+            Console.ReadKey();
             Thread.Sleep(3000);
             List<AnalogReader.AnalogRaw> buffer = AnalogReader.ReadFullBuffer(16);
             Console.WriteLine($"{buffer.Count} items read");
