@@ -23,9 +23,9 @@ namespace Wooting_Test
             Console.WriteLine("Set disconnected cb");
             AnalogReader.SetDisconnectedCallback((DisconnectedCallback)dc_cb);
             Stopwatch watch = new Stopwatch();
-            watch.Start();
             Console.WriteLine("Reading Analog data from the Esc key for 10 seconds. Press any key to start...");
             Console.ReadKey();
+            watch.Start();
             int lastValue = -1;
             do
             {
