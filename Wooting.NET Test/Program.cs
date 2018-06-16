@@ -12,7 +12,6 @@ namespace Wooting_Test
         {
             TestAnalog();
             TestRGB();
-            Console.ReadKey();
         }
         
         static void TestAnalog()
@@ -100,6 +99,7 @@ namespace Wooting_Test
                     Thread.Sleep(100);
                 }
             }
+            Console.WriteLine("press any key to reset all colors to default");
             Console.ReadKey();
             RGBControl.Reset();
             Console.ReadKey();
