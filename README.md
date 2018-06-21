@@ -1,4 +1,7 @@
 # Wooting.NET
+
+[![Build status](https://ci.appveyor.com/api/projects/status/gjnc6snr88246xh5?svg=true)](https://ci.appveyor.com/project/simon-wh/wooting-net)
+
 Simple wrapper library for [wooting-rgb-control](https://github.com/PastaJ36/wooting-rgb-control) and [wooting-analog-reader](https://github.com/PastaJ36/wooting-analog-reader)
 
 ## Basic Usage
