@@ -7,8 +7,4 @@ namespace Wooting
 {
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     public delegate void DisconnectedCallback();
-
-    public class Common
-    {
-    }
 }
