@@ -3,7 +3,7 @@ pull_requests:
   do_not_increment_build_number: true
 skip_branch_with_pr: true
 configuration: Release
-platform: x64
+platform: Any CPU
 image: Visual Studio 2017
 
 
