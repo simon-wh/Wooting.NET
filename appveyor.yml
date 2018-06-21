@@ -16,6 +16,6 @@ build:
   verbosity: minimal
 
 artifacts:
-  - path: Wooting.NET/Wooting.NET/bin/Release/netstandard2.0
+  - path: Wooting.NET/bin/Release/netstandard2.0
     name: Wooting.NET.1.0-v$(appveyor_build_version)
     type: zip
