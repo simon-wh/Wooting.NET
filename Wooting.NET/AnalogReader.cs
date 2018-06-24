@@ -180,7 +180,28 @@ namespace Wooting
             ModifierRightAlt,
             ModifierRightUi,
             FnKey,
-            ExtraIso
+            ExtraIso,
+            Numpad1 = 90,
+            Numpad2,
+            Numpad3,
+            NumpadEnter,
+            NumpadDot,
+            Numpad0,
+            Numpad6,
+            Numpad5,
+            Numpad4,
+            NumpadPlus,
+            Numpad9,
+            Numpad8,
+            Numpad7,
+            NumpadMinus,
+            NumpadMultiply,
+            NumpadDivide,
+            NumLock,
+            A1,
+            A2,
+            A3,
+            FullsizeMode
         }
     }
 }
