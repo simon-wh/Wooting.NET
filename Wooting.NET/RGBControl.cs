@@ -7,19 +7,7 @@ namespace Wooting
 {
     public static class RGBControl
     {
-        
-
-#if LINUX
-        private const string sdkDLL = "wooting-rgb-control.so";
-#else
-        private const string sdkDLL = "wooting-rgb-control.dll";
-#endif
-        //static RGBControl()
-        //{
-            //if (System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            //    sdkDLL = "wooting-rgb-control.so";
-
-        //}
+        private const string sdkDLL = "wooting-rgb-sdk";
 
         public const int MaxRGBRows = 6;
         public const int MaxRGBCols = 21;

@@ -8,11 +8,7 @@ namespace Wooting
 {
     public static class AnalogReader
     {
-#if LINUX
-        private const string sdkDLL = "wooting-analog-reader.so";
-#else
-        private const string sdkDLL = "wooting-analog-reader.dll";
-#endif
+        private const string sdkDLL = "wooting-analog-sdk";
 
         [StructLayout(LayoutKind.Sequential)]
         public struct AnalogRaw
