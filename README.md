@@ -4,6 +4,10 @@
 
 Simple wrapper library for [wooting-rgb-sdk](https://github.com/WootingKb/wooting-rgb-sdk) and [wooting-analog-sdk](https://github.com/WootingKb/wooting-analog-sdk)
 
+## Installation
+
+You can install Wooting.NET from the [nuget package](https://www.nuget.org/packages/Wooting.NET/1.0.0). Once done, you need to obtain the appropriate rgb/analog sdk dlls (get whatever you require). You need to add those to your project and make sure they are copied to the output directory. (You'll need to make sure the dll's are exactly `wooting-rgb-sdk.dll` and not `wooting-rgb-sdk64.dll` or else it won't work)
+
 ## Basic Usage
 
 Have a look at the test project for some more examples.
@@ -16,7 +20,7 @@ Requires  `wooting-rgb-sdk.dll` to be included alongside the wrapper
 
 ```c#
 RGBControl.IsConnected(); //Check if a keyboard is connected
-RGBControl.SetKey(WootingKey.Keys.Esc, 255, 0, 0, true) //Set the Escape key to red
+RGBControl.SetKey(WootingKey.Keys.Esc, 255, 0, 0, true); //Set the Escape key to red
 ```
 
 ### Analog
@@ -24,6 +28,6 @@ RGBControl.SetKey(WootingKey.Keys.Esc, 255, 0, 0, true) //Set the Escape key to 
 Requires `wooting-analog-sdk.dll` to be included alongside the wrapper
 
 ```c#
-byte data = AnalogReader.ReadAnalog(WootingKey.Keys.Esc) //Get the analog data from the Esc key
+byte data = AnalogReader.ReadAnalog(WootingKey.Keys.Esc); //Get the analog data from the Esc key
 ```
 
