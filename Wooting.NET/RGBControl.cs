@@ -19,7 +19,7 @@ namespace Wooting
         /// It is recommended to poll this function at the start of your application and after a disconnect.
         /// </summary>
         /// <returns>This function returns true (1) if keyboard is found.</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_kbd_connected")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_kbd_connected", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool IsConnected();
 
@@ -28,7 +28,7 @@ namespace Wooting
         /// The callback will be called when a Wooting keyboard disconnects.This will trigger after a failed color change.
         /// </summary>
         /// <param name="cb">The function pointer of the callback</param>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_set_disconnected_cb")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_set_disconnected_cb", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetDisconnectedCallback(DisconnectedCallback cb);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Wooting
         /// should be called when you close the application.
         /// </summary>
         /// <returns>None</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_reset")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_reset", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool Reset();
 
@@ -49,7 +49,7 @@ namespace Wooting
         /// <param name="row">The horizontal index of the key</param>
         /// <param name="column">The vertical index of the key</param>
         /// <returns>This functions return true (1) if the colour is reset.</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_direct_reset_key")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_direct_reset_key", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool ResetKey(byte row, byte column);
 
@@ -73,7 +73,7 @@ namespace Wooting
         /// This function will send the changes made with the wooting_rgb_array_**_** functions to the keyboard.
         /// </summary>
         /// <returns>This functions return true (1) if the colours are updated.</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_update_keyboard")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_update_keyboard", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool UpdateKeyboard();
 
@@ -83,7 +83,7 @@ namespace Wooting
         /// Standard is set to false.
         /// </summary>
         /// <param name="auto_update">Change the auto update flag</param>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_auto_update")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_auto_update", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAutoUpdate([MarshalAs(UnmanagedType.I1)] bool auto_update);
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Wooting
         /// <param name="green">A 0-255 value of the green color</param>
         /// <param name="blue">A 0-255 value of the blue color</param>
         /// <returns>This functions return true (1) if the colour is set.</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_direct_set_key")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_direct_set_key", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool _DirectSetKey(byte row, byte column, byte red, byte green, byte blue);
 
@@ -111,7 +111,7 @@ namespace Wooting
         /// <param name="green">A 0-255 value of the green color</param>
         /// <param name="blue">A 0-255 value of the blue color</param>
         /// <returns>This functions return true (1) if the colours are changed (optional: updated).</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_set_single")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_set_single", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool _SetKey(byte row, byte column, byte red, byte green, byte blue);
 
@@ -173,7 +173,7 @@ namespace Wooting
         /// </summary>
         /// <param name="colors_buffer">Pointer to a buffer of a full color array</param>
         /// <returns>This functions return true (1) if the colours are changed (optional: updated).</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_set_full")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_set_full", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool SetFull([MarshalAs(UnmanagedType.LPArray, SizeConst = MaxRGBRows * MaxRGBCols)] KeyColour[,] colors_buffer);
     }

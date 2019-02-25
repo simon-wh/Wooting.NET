@@ -23,7 +23,7 @@ namespace Wooting
         /// It is recommended to poll this function at the start of your application before starting reading.
         /// </summary>
         /// <returns>This function returns true (1) if keyboard is found.</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_kbd_connected")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_kbd_connected", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool IsConnected();
 
@@ -32,7 +32,7 @@ namespace Wooting
         /// The callback will be called when a Wooting keyboard disconnects.Right now this will only trigger after a failed read.
         /// </summary>
         /// <param name="cb"></param>
-        [DllImport(sdkDLL, EntryPoint = "wooting_set_disconnected_cb")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_set_disconnected_cb", CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetDisconnectedCallback(DisconnectedCallback cb);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Wooting
         /// <param name="row"></param>
         /// <param name="column"></param>
         /// <returns>Analog value from 0->255</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_read_analog")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_read_analog", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte ReadAnalog(byte row, byte column);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Wooting
         /// <param name="data">A buffer to put the read data into. Expects an array of wooting_full_buffer.</param>
         /// <param name="items">Amount of items in the array of the data buffer</param>
         /// <returns>This function returns items written and -1 on error.</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_read_full_buffer")]
+        [DllImport(sdkDLL, EntryPoint = "wooting_read_full_buffer", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ReadFullBuffer([In][Out][MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)] AnalogRaw[] data, uint items);
 
         /// <summary>
