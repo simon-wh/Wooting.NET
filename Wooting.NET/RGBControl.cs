@@ -5,6 +5,30 @@ using System.Text;
 
 namespace Wooting
 {
+    public enum DeviceType {
+        /// 10 Keyless Keyboard. E.g. Wooting One
+	    KeyboardTKL = 1,
+	
+        /// Full Size keyboard. E.g. Wooting Two
+        Keyboard = 2
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RGBDeviceInfo {
+        public bool Connected { get; private set; }
+
+        public string Model { get; private set; }
+
+        public byte MaxRows { get; private set; }
+
+        public byte MaxColumns { get; private set; }
+
+        public byte KeycodeLimit { get; private set; }
+
+        public DeviceType DeviceType { get; private set; }
+
+    }
+
     public static class RGBControl
     {
         private const string sdkDLL = "wooting-rgb-sdk";
@@ -176,6 +200,18 @@ namespace Wooting
         [DllImport(sdkDLL, EntryPoint = "wooting_rgb_array_set_full", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
         public static extern bool SetFull([MarshalAs(UnmanagedType.LPArray, SizeConst = MaxRGBRows * MaxRGBCols)] KeyColour[,] colors_buffer);
+
+
+        [DllImport(sdkDLL, CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr wooting_rgb_device_info();
+        
+        /// <summary>
+        /// This function returns a struct which provides various relevant details about the currently connected device. E.g. max rgb rows, columns, etc
+        /// </summary>
+        /// <returns></returns>
+        public static RGBDeviceInfo GetDeviceInfo() {
+            return Marshal.PtrToStructure<RGBDeviceInfo>(wooting_rgb_device_info());
+        }
     }
 }
 
