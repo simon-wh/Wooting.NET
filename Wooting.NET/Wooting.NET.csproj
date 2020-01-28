@@ -2,21 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Configurations>Debug;Release;Debug LINUX;Release LINUX</Configurations>
+    <Configurations>Debug;Release;</Configurations>
     <PackageId>Wooting.NET</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Authors>Simon Whyte</Authors>
     <RepositoryUrl>https://github.com/simon-wh/Wooting.NET</RepositoryUrl>
     <Description>Wooting RGB control and Analog Reader .NET wrapper</Description>
     <PackageTags>wooting,rgb,analog</PackageTags>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release LINUX|AnyCPU'">
-    <DefineConstants>TRACE;LINUX;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug LINUX|AnyCPU'">
-    <DefineConstants>TRACE;LINUX;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
-
 </Project>
