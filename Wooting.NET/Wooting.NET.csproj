@@ -7,7 +7,9 @@
     <Version>1.1.0</Version>
     <Authors>Simon Whyte</Authors>
     <RepositoryUrl>https://github.com/simon-wh/Wooting.NET</RepositoryUrl>
-    <Description>Wooting RGB control and Analog Reader .NET wrapper</Description>
-    <PackageTags>wooting,rgb,analog</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Wooting RGB control .NET wrapper</Description>
+    <PackageTags>wooting,rgb</PackageTags>
   </PropertyGroup>
+
 </Project>
