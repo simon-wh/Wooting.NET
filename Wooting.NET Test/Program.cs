@@ -10,47 +10,9 @@ namespace Wooting_Test
     {
         static void Main(string[] args)
         {
-            TestAnalog();
             TestRGB();
         }
         
-        static void TestAnalog()
-        {
-            Console.WriteLine("Wooting Analog reader testing!");
-            Console.WriteLine($"wooting_kbd_connected: {AnalogReader.IsConnected()}");
-
-            Console.WriteLine("Set disconnected cb");
-            AnalogReader.SetDisconnectedCallback((DisconnectedCallback)dc_cb);
-            Stopwatch watch = new Stopwatch();
-            Console.WriteLine("Reading Analog data from the Esc key for 10 seconds. Press any key to start...");
-            Console.ReadKey();
-            watch.Start();
-            int lastValue = -1;
-            do
-            {
-                int value = AnalogReader.ReadAnalog(WootingKey.Keys.Esc);
-                if (lastValue != value)
-                {
-                    lastValue = value;
-                    Console.WriteLine(value);
-                }
-            } while (watch.Elapsed.Seconds < 10);
-            watch.Stop();
-
-            Console.WriteLine("Going to read the buffer, please press down some keys for 3 seconds");
-            Console.ReadKey();
-            Thread.Sleep(3000);
-            List<AnalogReader.AnalogRaw> buffer = AnalogReader.ReadFullBuffer(16);
-            Console.WriteLine($"{buffer.Count} items read");
-            for (int i = 0; i < buffer.Count; i++)
-            {
-                AnalogReader.AnalogRaw raw = buffer[i];
-                Console.WriteLine($"Scan code: {raw.scan_code}, Value: {raw.analog_value}");
-            }
-            Console.ReadKey();
-        }
-
-
         static void dc_cb()
         {
             Console.WriteLine("it disconnected");
@@ -59,7 +21,18 @@ namespace Wooting_Test
         static void TestRGB()
         {
             Console.WriteLine("Wooting Rgb Control testing!");
-            Console.WriteLine($"wooting_rgb_kbd_connected: {RGBControl.IsConnected()}");
+            RGBDeviceInfo device = RGBControl.GetDeviceInfo();
+            Console.WriteLine($"Initial Device Info has got: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
+
+            bool connected = RGBControl.IsConnected();
+            Console.WriteLine($"wooting_rgb_kbd_connected: {connected}");
+            
+
+            if (!connected) return;
+
+            device = RGBControl.GetDeviceInfo();
+            Console.WriteLine($"Device Info has got: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
+
             //Console.WriteLine("Turning on auto-update!");
             //RGBControl.wooting_rgb_array_auto_update(true);
             Console.WriteLine("Set disconnected cb");
@@ -77,9 +50,9 @@ namespace Wooting_Test
 
             Console.WriteLine("Setting the keyboard blank!");
             KeyColour[,] keys = new KeyColour[RGBControl.MaxRGBRows, RGBControl.MaxRGBCols];
-            for (byte i = 0; i < RGBControl.MaxRGBCols; i++)
+            for (byte i = 0; i < device.MaxColumns; i++)
             {
-                for (byte j = 0; j < RGBControl.MaxRGBRows; j++)
+                for (byte j = 0; j < device.MaxRows; j++)
                 {
                     keys[j, i] = new KeyColour(0, 0, 0);
                 }
@@ -88,9 +61,9 @@ namespace Wooting_Test
             RGBControl.UpdateKeyboard();
             Thread.Sleep(1000);
 
-            for (byte i = 0; i < RGBControl.MaxRGBCols; i++)
+            for (byte i = 0; i < device.MaxColumns; i++)
             {
-                for (byte j = 0; j < RGBControl.MaxRGBRows; j++)
+                for (byte j = 0; j < device.MaxRows; j++)
                 {
                     Console.WriteLine($"Setting the key, ROW:{j}, COL:{i}");
                     keys[j, i] = new KeyColour(255, 255, 0);
