@@ -56,8 +56,17 @@ namespace Wooting
         public static extern void SetDisconnectedCallback(DisconnectedCallback cb);
 
         /// <summary>
+        /// 
+        /// This function will restore all the colours to the colours that were originally on the keyboard.
+        /// </summary>
+        /// <returns>None</returns>
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_reset_rgb", CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAs(UnmanagedType.I1)]
+        public static extern bool ResetRGB();
+
+        /// <summary>
         /// Reset all colors on keyboard to the original colors. 
-        /// This function will restore all the colours to the colours that were originally on the keyboard.This function
+        /// This function will restore all the colours to the colours that were originally on the keyboard and closes the keyboard handle.This function
         /// should be called when you close the application.
         /// </summary>
         /// <returns>None</returns>
