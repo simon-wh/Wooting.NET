@@ -2,7 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/gjnc6snr88246xh5?svg=true)](https://ci.appveyor.com/project/simon-wh/wooting-net)
 
-Simple wrapper library for [wooting-rgb-sdk](https://github.com/WootingKb/wooting-rgb-sdk) and [wooting-analog-sdk](https://github.com/WootingKb/wooting-analog-sdk)
+Simple wrapper library for [wooting-rgb-sdk](https://github.com/WootingKb/wooting-rgb-sdk)
 
 ## Installation
 
@@ -25,9 +25,4 @@ RGBControl.SetKey(WootingKey.Keys.Esc, 255, 0, 0, true); //Set the Escape key to
 
 ### Analog
 
-Requires `wooting-analog-sdk.dll` to be included alongside the wrapper
-
-```c#
-byte data = AnalogReader.ReadAnalog(WootingKey.Keys.Esc); //Get the analog data from the Esc key
-```
-
+The original Analog SDK has been deprecated and replaced with a [new one found here](http://github.com/WootingKb/wooting-analog-sdk). You can find the C# Library to use it on [Nuget](https://www.nuget.org/packages/WootingAnalogSDK.NET) and [GitHub](https://github.com/WootingKb/wooting-analog-wrappers). There's also a guide for getting started with the Analog SDK in C# [found here](https://dev.wooting.io/wooting-analog-sdk-guide/c-guide/)
