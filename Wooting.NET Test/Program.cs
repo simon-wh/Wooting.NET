@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -38,8 +38,8 @@ namespace Wooting_Test
             Console.WriteLine("Set disconnected cb");
             RGBControl.SetDisconnectedCallback((DisconnectedCallback)dc_cb);
             Console.WriteLine("Setting some keys directly!");
-            Console.WriteLine($"Setting ESC green: {RGBControl.SetKey(WootingKey.Keys.Esc, 0, 255, 0)}");
-            RGBControl.UpdateKeyboard();
+            Console.WriteLine($"Setting ESC green: {RGBControl.SetKey(WootingKey.Keys.Esc, 0, 255, 0, true)}");
+            // RGBControl.UpdateKeyboard();
             Console.WriteLine("Setting Enter Red");
             RGBControl.SetKey(WootingKey.Keys.Enter, 255, 0, 0, true);
             Console.WriteLine("Setting G blue");
@@ -47,6 +47,7 @@ namespace Wooting_Test
             Console.WriteLine("Setting Mode/Scroll Lock green");
             RGBControl.SetKey(WootingKey.Keys.Mode_ScrollLock, 0, 255, 0, true);
             Thread.Sleep(5000);
+            Console.ReadKey();
 
             Console.WriteLine("Setting the keyboard blank!");
             KeyColour[,] keys = new KeyColour[RGBControl.MaxRGBRows, RGBControl.MaxRGBCols];
@@ -59,7 +60,9 @@ namespace Wooting_Test
             }
             RGBControl.SetFull(keys);
             RGBControl.UpdateKeyboard();
+            RGBControl.ResetRGB();
             Thread.Sleep(1000);
+            RGBControl.Reset();
 
             for (byte i = 0; i < device.MaxColumns; i++)
             {
