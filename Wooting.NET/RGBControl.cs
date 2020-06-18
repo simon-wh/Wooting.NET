@@ -70,9 +70,9 @@ namespace Wooting
         /// should be called when you close the application.
         /// </summary>
         /// <returns>None</returns>
-        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_reset", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(sdkDLL, EntryPoint = "wooting_rgb_close", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.I1)]
-        public static extern bool Reset();
+        public static extern bool Close();
 
         /// <summary>
         /// Directly reset 1 key on the keyboard to the original color.

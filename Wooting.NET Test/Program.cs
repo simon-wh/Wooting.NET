@@ -46,7 +46,7 @@ namespace Wooting_Test
             RGBControl.SetKey(WootingKey.Keys.G, 0, 0, 255, true);
             Console.WriteLine("Setting Mode/Scroll Lock green");
             RGBControl.SetKey(WootingKey.Keys.Mode_ScrollLock, 0, 255, 0, true);
-            Thread.Sleep(5000);
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
 
             Console.WriteLine("Setting the keyboard blank!");
@@ -62,7 +62,7 @@ namespace Wooting_Test
             RGBControl.UpdateKeyboard();
             RGBControl.ResetRGB();
             Thread.Sleep(1000);
-            RGBControl.Reset();
+            RGBControl.Close();
 
             for (byte i = 0; i < device.MaxColumns; i++)
             {
@@ -75,10 +75,9 @@ namespace Wooting_Test
                     Thread.Sleep(100);
                 }
             }
-            Console.WriteLine("press any key to reset all colors to default");
+            Console.WriteLine("Press any key to reset all colors to default...");
             Console.ReadKey();
-            RGBControl.Reset();
-            Console.ReadKey();
+            RGBControl.Close();
         }
     }
 }
