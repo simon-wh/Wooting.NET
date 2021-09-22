@@ -26,6 +26,7 @@ namespace Wooting_Test
 
             bool connected = RGBControl.IsConnected();
             Console.WriteLine($"wooting_rgb_kbd_connected: {connected}");
+            Console.WriteLine($"Layout type: {RGBControl.DeviceLayout()}");
             
 
             if (!connected) return;

@@ -233,6 +233,18 @@ namespace Wooting
         public static RGBDeviceInfo GetDeviceInfo() {
             return Marshal.PtrToStructure<RGBDeviceInfo>(wooting_rgb_device_info());
         }
+
+
+        [DllImport(sdkDLL, CallingConvention = CallingConvention.Cdecl)]
+        private static extern LayoutType wooting_rgb_device_layout();
+
+        /// <summary>
+        /// This function returns an enum flag indicating the layout, e.g. ISO. See LayoutType for options. It will return Unkown if no device is connected or it failed to get the layout info from the device
+        /// </summary>
+        /// <returns></returns>
+        public static LayoutType DeviceLayout() {
+            return wooting_rgb_device_layout();
+        }
     }
 }
 
