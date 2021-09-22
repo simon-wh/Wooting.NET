@@ -22,7 +22,7 @@ namespace Wooting_Test
         {
             Console.WriteLine("Wooting Rgb Control testing!");
             RGBDeviceInfo device = RGBControl.GetDeviceInfo();
-            Console.WriteLine($"Initial Device Info has got: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
+            Console.WriteLine($"Initial Device Info has got: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Layout: {device.LayoutType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
 
             bool connected = RGBControl.IsConnected();
             Console.WriteLine($"wooting_rgb_kbd_connected: {connected}");
@@ -31,7 +31,7 @@ namespace Wooting_Test
             if (!connected) return;
 
             device = RGBControl.GetDeviceInfo();
-            Console.WriteLine($"Device Info has got: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
+            Console.WriteLine($"Device Info has got: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Layout: {device.LayoutType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
 
             //Console.WriteLine("Turning on auto-update!");
             //RGBControl.wooting_rgb_array_auto_update(true);

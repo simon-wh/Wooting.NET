@@ -13,6 +13,14 @@ namespace Wooting
         Keyboard = 2
     }
 
+    public enum LayoutType {
+        Unknown = -1,
+
+	    ANSI = 0,
+	
+        ISO = 1
+    }
+
     [StructLayout(LayoutKind.Sequential)]
     public struct RGBDeviceInfo {
         public bool Connected { get; private set; }
@@ -26,6 +34,10 @@ namespace Wooting
         public byte KeycodeLimit { get; private set; }
 
         public DeviceType DeviceType { get; private set; }
+
+        private bool _useV2Inteface {get; set;}
+
+        public LayoutType LayoutType { get; private set; }
 
     }
 
