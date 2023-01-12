@@ -249,7 +249,7 @@ namespace Wooting
         /// <summary>
         /// This function returns how many wooting devices are connected to the system.
         /// </summary>
-        [DllImport(sdkDLL, EntryPoint = "wooting_usb_keyboard_count", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(sdkDLL, EntryPoint = "wooting_usb_device_count", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte GetDeviceCount();
 
         /// <summary>

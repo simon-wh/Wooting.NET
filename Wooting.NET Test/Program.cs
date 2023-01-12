@@ -43,27 +43,37 @@ namespace Wooting_Test
                     }
                 }
                 RGBControl.SetFull(keys);
+                RGBControl.UpdateKeyboard();
             }
+
+            Console.WriteLine("Set all keyboards to red. Press any key to continue.");
+            Console.ReadKey();
 
             for (byte idx = 0; idx < count; idx++)
             {
                 RGBControl.SetControlDevice(idx);
 
                 Console.WriteLine($"Setting {infos[idx].Model}'s WASD keys to white");
-                RGBControl.SetKey(WootingKey.Keys.W, 255, 255, 255);
-                RGBControl.SetKey(WootingKey.Keys.A, 255, 255, 255);
-                RGBControl.SetKey(WootingKey.Keys.S, 255, 255, 255);
-                RGBControl.SetKey(WootingKey.Keys.D, 255, 255, 255);
+                
+                //HACK: workaround for the buffer bug. If i set them to 255/255/255, the second keyboard won't update.
+                byte differentColor = (byte)(255 - idx * 10);
+                
+                RGBControl.SetKey(WootingKey.Keys.W, differentColor, 255, 255);
+                RGBControl.SetKey(WootingKey.Keys.A, differentColor, 255, 255);
+                RGBControl.SetKey(WootingKey.Keys.S, differentColor, 255, 255);
+                RGBControl.SetKey(WootingKey.Keys.D, differentColor, 255, 255);
                 RGBControl.UpdateKeyboard();
-                Thread.Sleep(1000);
             }
+
+            Console.WriteLine("Set all WASD keys to white. Press any key to continue.");
+            Console.ReadKey();
 
             for (byte idx = 0; idx < count; idx++)
             {
                 var device = infos[idx];
                 RGBControl.SetControlDevice(idx);
 
-                Console.WriteLine($"Setting {infos[idx].Model}'s to yellow");
+                Console.WriteLine($"Setting {infos[idx].Model}'s to yellow one key at a time.");
 
                 KeyColour[,] keys = new KeyColour[RGBControl.MaxRGBRows, RGBControl.MaxRGBCols];
                 for (byte i = 0; i < device.MaxColumns; i++)
