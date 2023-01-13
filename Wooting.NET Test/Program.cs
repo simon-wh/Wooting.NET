@@ -12,72 +12,91 @@ namespace Wooting_Test
         {
             TestRGB();
         }
-        
-        static void dc_cb()
-        {
-            Console.WriteLine("it disconnected");
-        }
 
         static void TestRGB()
         {
-            Console.WriteLine("Wooting Rgb Control testing!");
-            RGBDeviceInfo device = RGBControl.GetDeviceInfo();
-            Console.WriteLine($"Initial Device Info has got: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
+            if (!RGBControl.IsConnected())
+                return;
 
-            bool connected = RGBControl.IsConnected();
-            Console.WriteLine($"wooting_rgb_kbd_connected: {connected}");
-            
+            var count = RGBControl.GetDeviceCount();
+            var infos = new RGBDeviceInfo[count];
+            for (byte i = 0; i < count; i++)
+            {
+                RGBControl.SetControlDevice(i);
+                var device = RGBControl.GetDeviceInfo();
+                Console.WriteLine($"Found device: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
+                infos[i] = device;
+            }
 
-            if (!connected) return;
+            for (byte idx = 0; idx < count; idx++)
+            {
+                Console.WriteLine($"Setting {infos[idx].Model} to red");
 
-            device = RGBControl.GetDeviceInfo();
-            Console.WriteLine($"Device Info has got: Connected: {device.Connected}, Model: {device.Model}, Type: {device.DeviceType}, Max Rows: {device.MaxRows}, Max Cols: {device.MaxColumns}, Max Keycode: {device.KeycodeLimit}");
+                RGBControl.SetControlDevice(idx);
+                var device = infos[idx];
+                KeyColour[,] keys = new KeyColour[RGBControl.MaxRGBRows, RGBControl.MaxRGBCols];
+                for (byte i = 0; i < device.MaxColumns; i++)
+                {
+                    for (byte j = 0; j < device.MaxRows; j++)
+                    {
+                        keys[j, i] = new KeyColour(255, 0, 0);
+                    }
+                }
+                RGBControl.SetFull(keys);
+                RGBControl.UpdateKeyboard();
+            }
 
-            //Console.WriteLine("Turning on auto-update!");
-            //RGBControl.wooting_rgb_array_auto_update(true);
-            Console.WriteLine("Set disconnected cb");
-            RGBControl.SetDisconnectedCallback((DisconnectedCallback)dc_cb);
-            Console.WriteLine("Setting some keys directly!");
-            Console.WriteLine($"Setting ESC green: {RGBControl.SetKey(WootingKey.Keys.Esc, 0, 255, 0, true)}");
-            // RGBControl.UpdateKeyboard();
-            Console.WriteLine("Setting Enter Red");
-            RGBControl.SetKey(WootingKey.Keys.Enter, 255, 0, 0, true);
-            Console.WriteLine("Setting G blue");
-            RGBControl.SetKey(WootingKey.Keys.G, 0, 0, 255, true);
-            Console.WriteLine("Setting Mode/Scroll Lock green");
-            RGBControl.SetKey(WootingKey.Keys.Mode_ScrollLock, 0, 255, 0, true);
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("Set all keyboards to red. Press any key to continue.");
             Console.ReadKey();
 
-            Console.WriteLine("Setting the keyboard blank!");
-            KeyColour[,] keys = new KeyColour[RGBControl.MaxRGBRows, RGBControl.MaxRGBCols];
-            for (byte i = 0; i < device.MaxColumns; i++)
+            for (byte idx = 0; idx < count; idx++)
             {
-                for (byte j = 0; j < device.MaxRows; j++)
-                {
-                    keys[j, i] = new KeyColour(0, 0, 0);
-                }
-            }
-            RGBControl.SetFull(keys);
-            RGBControl.UpdateKeyboard();
-            RGBControl.ResetRGB();
-            Thread.Sleep(1000);
-            RGBControl.Close();
+                RGBControl.SetControlDevice(idx);
 
-            for (byte i = 0; i < device.MaxColumns; i++)
+                Console.WriteLine($"Setting {infos[idx].Model}'s WASD keys to white");
+                
+                //HACK: workaround for the buffer bug. If i set them to 255/255/255, the second keyboard won't update.
+                byte differentColor = (byte)(255 - idx * 10);
+                
+                RGBControl.SetKey(WootingKey.Keys.W, differentColor, 255, 255);
+                RGBControl.SetKey(WootingKey.Keys.A, differentColor, 255, 255);
+                RGBControl.SetKey(WootingKey.Keys.S, differentColor, 255, 255);
+                RGBControl.SetKey(WootingKey.Keys.D, differentColor, 255, 255);
+                RGBControl.UpdateKeyboard();
+            }
+
+            Console.WriteLine("Set all WASD keys to white. Press any key to continue.");
+            Console.ReadKey();
+
+            for (byte idx = 0; idx < count; idx++)
             {
-                for (byte j = 0; j < device.MaxRows; j++)
+                var device = infos[idx];
+                RGBControl.SetControlDevice(idx);
+
+                Console.WriteLine($"Setting {infos[idx].Model}'s to yellow one key at a time.");
+
+                KeyColour[,] keys = new KeyColour[RGBControl.MaxRGBRows, RGBControl.MaxRGBCols];
+                for (byte i = 0; i < device.MaxColumns; i++)
                 {
-                    Console.WriteLine($"Setting the key, ROW:{j}, COL:{i}");
-                    keys[j, i] = new KeyColour(255, 255, 0);
-                    RGBControl.SetFull(keys);
-                    RGBControl.UpdateKeyboard();
-                    Thread.Sleep(100);
+                    for (byte j = 0; j < device.MaxRows; j++)
+                    {
+                        Console.WriteLine($"Setting the key, ROW:{j}, COL:{i}");
+                        keys[j, i] = new KeyColour(255, 255, 0);
+                        RGBControl.SetFull(keys);
+                        RGBControl.UpdateKeyboard();
+                        Thread.Sleep(33);
+                    }
                 }
             }
+
             Console.WriteLine("Press any key to reset all colors to default...");
             Console.ReadKey();
-            RGBControl.Close();
+            
+            for (byte idx = 0; idx < count; idx++)
+            {
+                RGBControl.SetControlDevice(idx);
+                RGBControl.ResetRGB();
+            }
         }
     }
 }
