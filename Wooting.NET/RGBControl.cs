@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -38,7 +38,7 @@ namespace Wooting
         private bool _useV2Inteface {get; set;}
 
         public LayoutType LayoutType { get; private set; }
-
+        
     }
 
     public static class RGBControl
@@ -225,7 +225,7 @@ namespace Wooting
 
         [DllImport(sdkDLL, CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr wooting_rgb_device_info();
-        
+
         /// <summary>
         /// This function returns a struct which provides various relevant details about the currently connected device. E.g. max rgb rows, columns, etc
         /// </summary>
@@ -245,6 +245,18 @@ namespace Wooting
         public static LayoutType DeviceLayout() {
             return wooting_rgb_device_layout();
         }
+
+        /// <summary>
+        /// This function returns how many wooting devices are connected to the system.
+        /// </summary>
+        [DllImport(sdkDLL, EntryPoint = "wooting_usb_device_count", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte GetDeviceCount();
+
+        /// <summary>
+        /// This function sets which device will be controlled by the other functions in this library.
+        /// </summary>
+        /// <param name="idx"></param>
+        [DllImport(sdkDLL, EntryPoint = "wooting_usb_select_device", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetControlDevice(byte idx);
     }
 }
-
