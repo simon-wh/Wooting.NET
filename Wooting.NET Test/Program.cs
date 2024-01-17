@@ -91,12 +91,13 @@ namespace Wooting_Test
 
             Console.WriteLine("Press any key to reset all colors to default...");
             Console.ReadKey();
-            
-            for (byte idx = 0; idx < count; idx++)
-            {
-                RGBControl.SetControlDevice(idx);
-                RGBControl.ResetRGB();
-            }
+
+            // for (byte idx = 0; idx < count; idx++)
+            // {
+            //     RGBControl.SetControlDevice(idx);
+            //     RGBControl.ResetRGB();
+            // }
+            RGBControl.Close();
         }
     }
 }
