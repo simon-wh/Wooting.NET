@@ -4,7 +4,7 @@ Simple wrapper library for [wooting-rgb-sdk](https://github.com/WootingKb/wootin
 
 ## Installation
 
-You can install Wooting.NET from the [nuget package](https://www.nuget.org/packages/Wooting.NET/1.0.0). Once done, you need to obtain the appropriate rgb/analog sdk dlls (get whatever you require). You need to add those to your project and make sure they are copied to the output directory. (You'll need to make sure the dll's are exactly `wooting-rgb-sdk.dll` and not `wooting-rgb-sdk64.dll` or else it won't work)
+You can install Wooting.NET from the [nuget package](https://www.nuget.org/packages/Wooting.NET/1.0.0). Once done, you need to obtain the appropriate rgb sdk dlls. You need to add those to your project and make sure they are copied to the output directory. (You'll need to make sure the dll's are exactly `wooting-rgb-sdk.dll` and not `wooting-rgb-sdk64.dll` or else it won't work)
 
 ## Basic Usage
 
