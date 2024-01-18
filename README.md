@@ -1,7 +1,5 @@
 # Wooting.NET
 
-[![Build status](https://ci.appveyor.com/api/projects/status/gjnc6snr88246xh5?svg=true)](https://ci.appveyor.com/project/simon-wh/wooting-net)
-
 Simple wrapper library for [wooting-rgb-sdk](https://github.com/WootingKb/wooting-rgb-sdk)
 
 ## Installation
@@ -16,7 +14,7 @@ The `WootingKey.Keys` enum is available to make it simpler to apply operations t
 
 ### RGB
 
-Requires  `wooting-rgb-sdk.dll` to be included alongside the wrapper
+Requires `wooting-rgb-sdk.dll` to be included alongside the wrapper
 
 ```c#
 RGBControl.IsConnected(); //Check if a keyboard is connected
