@@ -53,19 +53,32 @@ namespace Wooting_Test
             {
                 RGBControl.SetControlDevice(idx);
 
-                Console.WriteLine($"Setting {infos[idx].Model}'s WASD keys to white");
-                
-                //HACK: workaround for the buffer bug. If i set them to 255/255/255, the second keyboard won't update.
-                byte differentColor = (byte)(255 - idx * 10);
-                
-                RGBControl.SetKey(WootingKey.Keys.W, differentColor, 255, 255);
-                RGBControl.SetKey(WootingKey.Keys.A, differentColor, 255, 255);
-                RGBControl.SetKey(WootingKey.Keys.S, differentColor, 255, 255);
-                RGBControl.SetKey(WootingKey.Keys.D, differentColor, 255, 255);
+                var device = infos[idx];
+
+
+                if (device.DeviceType != DeviceType.Keypad3Key)
+                {
+                    Console.WriteLine($"Setting {device.Model}'s WASD keys to white");
+
+                    RGBControl.SetKey(WootingKey.Keys.W, 255, 255, 255);
+                    RGBControl.SetKey(WootingKey.Keys.A, 255, 255, 255);
+                    RGBControl.SetKey(WootingKey.Keys.S, 255, 255, 255);
+                    RGBControl.SetKey(WootingKey.Keys.D, 255, 255, 255);
+                }
+                else
+                {
+                    Console.WriteLine($"Setting {device.Model}'s 3 primary keys to white");
+
+
+                    RGBControl.SetKey(2, 1, 255, 255, 255);
+                    RGBControl.SetKey(2, 3, 255, 255, 255);
+                    RGBControl.SetKey(2, 5, 255, 255, 255);
+                }
+
                 RGBControl.UpdateKeyboard();
             }
 
-            Console.WriteLine("Set all WASD keys to white. Press any key to continue.");
+            Console.WriteLine("Set groups of keys to white on all devices. Press any key to continue.");
             Console.ReadKey();
 
             for (byte idx = 0; idx < count; idx++)
@@ -73,7 +86,7 @@ namespace Wooting_Test
                 var device = infos[idx];
                 RGBControl.SetControlDevice(idx);
 
-                Console.WriteLine($"Setting {infos[idx].Model}'s to yellow one key at a time.");
+                Console.WriteLine($"Setting {device.Model}'s to yellow one key at a time.");
 
                 KeyColour[,] keys = new KeyColour[RGBControl.MaxRGBRows, RGBControl.MaxRGBCols];
                 for (byte i = 0; i < device.MaxColumns; i++)
@@ -91,12 +104,13 @@ namespace Wooting_Test
 
             Console.WriteLine("Press any key to reset all colors to default...");
             Console.ReadKey();
-            
-            for (byte idx = 0; idx < count; idx++)
-            {
-                RGBControl.SetControlDevice(idx);
-                RGBControl.ResetRGB();
-            }
+
+            // for (byte idx = 0; idx < count; idx++)
+            // {
+            //     RGBControl.SetControlDevice(idx);
+            //     RGBControl.ResetRGB();
+            // }
+            RGBControl.Close();
         }
     }
 }

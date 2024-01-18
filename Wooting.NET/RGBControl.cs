@@ -5,24 +5,33 @@ using System.Text;
 
 namespace Wooting
 {
-    public enum DeviceType {
+    public enum DeviceType
+    {
         /// 10 Keyless Keyboard. E.g. Wooting One
 	    KeyboardTKL = 1,
-	
+
         /// Full Size keyboard. E.g. Wooting Two
-        Keyboard = 2
+        Keyboard = 2,
+
+        /// 60% keyboard. E.g. Wooting 60HE
+        Keyboard60 = 3,
+
+        /// 3 key keypad, E.g. Wooting UwU
+        Keypad3Key = 4,
     }
 
-    public enum LayoutType {
+    public enum LayoutType
+    {
         Unknown = -1,
 
-	    ANSI = 0,
-	
+        ANSI = 0,
+
         ISO = 1
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct RGBDeviceInfo {
+    public struct RGBDeviceInfo
+    {
         public bool Connected { get; private set; }
 
         public string Model { get; private set; }
@@ -35,10 +44,10 @@ namespace Wooting
 
         public DeviceType DeviceType { get; private set; }
 
-        private bool _useV2Inteface {get; set;}
+        private bool _useV2Inteface { get; set; }
 
         public LayoutType LayoutType { get; private set; }
-        
+
     }
 
     public static class RGBControl
@@ -230,7 +239,8 @@ namespace Wooting
         /// This function returns a struct which provides various relevant details about the currently connected device. E.g. max rgb rows, columns, etc
         /// </summary>
         /// <returns></returns>
-        public static RGBDeviceInfo GetDeviceInfo() {
+        public static RGBDeviceInfo GetDeviceInfo()
+        {
             return Marshal.PtrToStructure<RGBDeviceInfo>(wooting_rgb_device_info());
         }
 
@@ -242,7 +252,8 @@ namespace Wooting
         /// This function returns an enum flag indicating the layout, e.g. ISO. See LayoutType for options. It will return Unkown if no device is connected or it failed to get the layout info from the device
         /// </summary>
         /// <returns></returns>
-        public static LayoutType DeviceLayout() {
+        public static LayoutType DeviceLayout()
+        {
             return wooting_rgb_device_layout();
         }
 

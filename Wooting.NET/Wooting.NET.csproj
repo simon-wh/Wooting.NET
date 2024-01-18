@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Configurations>Debug;Release;</Configurations>
     <PackageId>Wooting.NET</PackageId>
-    <Version>1.2.0</Version>
+    <Version>1.6.3</Version>
     <Authors>Simon Whyte</Authors>
     <RepositoryUrl>https://github.com/simon-wh/Wooting.NET</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
